@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
  NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
@@ -8,21 +8,23 @@ const Token = require("../models/token");
 const User = require("../models/user");
 const passwordEncrypt = require("../helpers/passwordEncrypt");
 
+const jwt = require("jsonwebtoken");
+
 module.exports = {
   login: async (req, res) => {
     /*
-            #swagger.tags = ["Authentication"]
-            #swagger.summary = "Login"
-            #swagger.description = 'Login with username (or email) and password for get simpleToken and JWT'
-            #swagger.parameters["body"] = {
-                in: "body",
-                required: true,
-                schema: {
-                    "username": "test",
-                    "password": "aA?123456",
+                #swagger.tags = ["Authentication"]
+                #swagger.summary = "Login"
+                #swagger.description = 'Login with username (or email) and password for get simpleToken and JWT'
+                #swagger.parameters["body"] = {
+                    in: "body",
+                    required: true,
+                    schema: {
+                        "username": "test",
+                        "password": "aA?123456",
+                    }
                 }
-            }
-        */
+            */
     const { username, email, password } = req.body;
     if (!((username || email) && password)) {
       res.errorStatusCode = 401;
@@ -38,6 +40,7 @@ module.exports = {
       throw new Error("This account is not active.");
     }
 
+    /* SIMPLE TOKEN */
     let tokenData = await Token.findOne({ userId: user.id });
     if (!tokenData) {
       tokenData = await Token.create({
@@ -45,6 +48,27 @@ module.exports = {
         token: passwordEncrypt(user.id + Date.now()),
       });
     }
+    /* SIMPLE TOKEN */
+    // ACCESS TOKEN
+
+    /* JWT */
+    const accessData = {
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      isActive: user.isActive,
+      isAdmin: user.isAdmin,
+    };
+    // Convert to JWT:
+        const accessToken = jwt.sign(accessData, )
+
+        // REFRESH TOKEN
+        const refreshData = {
+            _id: user._id,
+            password: user.password}
+
+    /* JWT */
+
     res.send({
       error: false,
       token: tokenData.token,
@@ -56,9 +80,9 @@ module.exports = {
 
   logout: async (req, res) => {
     /*
-            #swagger.tags = ["Tokens"]
-            #swagger.summary = "Create Token"
-        */
+                #swagger.tags = ["Tokens"]
+                #swagger.summary = "Create Token"
+            */
 
     const auth = req.headers?.authorization; //"Token token"
     const tokenKey = auth ? auth.split(" ") : null; // [ "Token", tokenKey]
