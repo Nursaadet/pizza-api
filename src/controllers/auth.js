@@ -60,12 +60,21 @@ module.exports = {
       isAdmin: user.isAdmin,
     };
     // Convert to JWT:
-        const accessToken = jwt.sign(accessData, )
+    // jwt.sign(payload, key, { expiresIn: '30m' })
+    const accessToken = jwt.sign(accessData, process.env.ACCESS_KEY, {
+      expiresIn: "30m",
+    });
 
-        // REFRESH TOKEN
-        const refreshData = {
-            _id: user._id,
-            password: user.password}
+    // REFRESH TOKEN
+    const refreshData = {
+      _id: user._id,
+      password: user.password,
+    };
+
+    // Convert to JWT:
+    const refreshToken = jwt.sign(refreshData, process.env.REFRESH_KEY, {
+      expiresIn: "3d",
+    });
 
     /* JWT */
 
