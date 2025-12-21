@@ -6,8 +6,8 @@
 const Token = require("../models/token");
 
 module.exports = async (req, res, next) => {
-  const auth = req.headers?.authorization; // Token ...tokenKey...
-  const tokenKey = auth ? auth.split(" ") : null; // ['Token', '...tokenKey...']
+  const auth = req.headers?.authorization; // Token ...tokenKey... || Bearer ...jwtAccess...
+  const tokenKey = auth ? auth.split(" ") : null; // ['Token', '...tokenKey...'] || ['Bearer', '...jwtAccess...']
 
   if (tokenKey) {
     if (tokenKey[0] == "Token") {
@@ -17,5 +17,6 @@ module.exports = async (req, res, next) => {
       req.user = tokenData ? tokenData.userId : false;
     }
   }
+
   next();
 };

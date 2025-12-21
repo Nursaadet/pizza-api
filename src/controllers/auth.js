@@ -81,6 +81,10 @@ module.exports = {
     res.send({
       error: false,
       token: tokenData.token,
+      bearer: {
+        access: accessToken,
+        refresh: refreshToken,
+      },
       user,
     });
   },
@@ -95,7 +99,7 @@ module.exports = {
 
     const auth = req.headers?.authorization; //"Token token"
     const tokenKey = auth ? auth.split(" ") : null; // [ "Token", tokenKey]
-    const result = await Token.deleteOne({ token: tokenKey });
+    const result = await Token.deleteOne({ token: tokenKey[1] });
 
     res.send({
       error: false,
