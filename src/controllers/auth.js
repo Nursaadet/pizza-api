@@ -88,6 +88,20 @@ module.exports = {
       user,
     });
   },
+  refresh: async (req, res) => {   /*
+            #swagger.tags = ["Authentication"]
+            #swagger.summary = "Refresh"
+            #swagger.description = 'Refresh with refreshToken for get accessToken'
+            #swagger.parameters["body"] = {
+                in: "body",
+                required: true,
+                schema: {
+                    "bearer": {
+                        refresh: '...refresh_token...'
+                    }
+                }
+            }
+        */},
 
   logout: async (req, res) => {
     /*
