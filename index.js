@@ -93,15 +93,15 @@ app.use(require("./src/middlewares/queryHandler"));
 //     success ? console.log('SUCCESS:', success) : console.log('ERROR: ', error)
 // })
 
-//* GoogleMail (gmail)
-//* Google -> AccountHome -> Security -> Two-Step-Verify -> App-Passwords
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'saadet@clarusway.com',
-        pass: 'krkh fxow gujl cjh' // You can also do it by using env.
-    }
-})
+// //* GoogleMail (gmail)
+// //* Google -> AccountHome -> Security -> Two-Step-Verify -> App-Passwords
+// const transporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//         user: 'saadet@clarusway.com',
+//         pass: 'krkh fxow gujl cjh' // You can also do it by using env.
+//     }
+// })
 
 //* YandexMail (yandex)
 // const transporter = nodemailer.createTransport({
