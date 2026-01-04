@@ -17,7 +17,8 @@ const upload = multer({
     filename: function (req, file, returnCallback) {
       console.log("file", file);
       // returnCallback(error, fileName)
-      returnCallback(null, "image.png");
+      // returnCallback(null, file.originalname)
+      returnCallback(null, Date.now() + "_" + file.originalname);
     },
   }),
 });
@@ -29,14 +30,15 @@ const pizza = require("../controllers/pizza");
 
 // URL: /pizzas
 
-router.route("/")
-.get(pizza.list)
- // .post(upload.single('image'), pizza.create);
-    .post(upload.array('image'), pizza.create);
-    // .post(upload.any(), pizza.create);
+router
+  .route("/")
+  .get(pizza.list)
+  // .post(upload.single('image'), pizza.create);
+  .post(upload.array("image"), pizza.create);
+// .post(upload.any(), pizza.create);
 
 router
-.route("/:id")
+  .route("/:id")
   .get(pizza.read)
   .put(pizza.update)
   .patch(pizza.update)
