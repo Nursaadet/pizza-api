@@ -50,7 +50,7 @@ app.use(require("./src/middlewares/queryHandler"));
 // NodeMailer.com
 // npm install nodemailer
 
-const nodemailer = require("nodemailer");
+// const nodemailer = require("nodemailer");
 
 // Create Test Account:
 // nodemailer.createTestAccount().then((data) => console.log(data))
