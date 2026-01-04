@@ -4,6 +4,11 @@
 ------------------------------------------------------- */
 const router = require("express").Router();
 /* ------------------------------------------------------- */
+// UPLOAD:
+// npm i multer
+// https://expressjs.com/en/resources/middleware/multer.html
+
+/* ------------------------------------------------------- */
 // routes/pizza:
 
 const pizza = require("../controllers/pizza");
@@ -12,8 +17,7 @@ const pizza = require("../controllers/pizza");
 
 router.route("/").get(pizza.list).post(pizza.create);
 
-router
-  .route("/:id")
+router.route("/:id")
   .get(pizza.read)
   .put(pizza.update)
   .patch(pizza.update)
