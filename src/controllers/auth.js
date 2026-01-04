@@ -1,6 +1,6 @@
 "use strict";
 /* -------------------------------------------------------
- NODEJS EXPRESS | CLARUSWAY FullStack Team
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 // Authentication Controller:
 
@@ -49,11 +49,11 @@ module.exports = {
       });
     }
     /* SIMPLE TOKEN */
-    // ACCESS TOKEN
 
     /* JWT */
+    // ACCESS TOKEN
     const accessData = {
-      id: user._id,
+      _id: user._id,
       username: user.username,
       email: user.email,
       isActive: user.isActive,
@@ -70,12 +70,10 @@ module.exports = {
       _id: user._id,
       password: user.password,
     };
-
     // Convert to JWT:
     const refreshToken = jwt.sign(refreshData, process.env.REFRESH_KEY, {
       expiresIn: "3d",
     });
-
     /* JWT */
 
     res.send({
@@ -88,6 +86,7 @@ module.exports = {
       user,
     });
   },
+
   refresh: async (req, res) => {
     /*
             #swagger.tags = ["Authentication"]
@@ -102,49 +101,46 @@ module.exports = {
                     }
                 }
             }
-
-
-        const refreshToken = req.body?.bearer?.refresh
-
-        if (refreshToken) {
-
-            const refreshData = await jwt.verify(refreshToken, process.env.REFRESH_KEY)
-            // console.log(refreshData)
-
-            if (refreshData) {
-
-                const user = await User.findOne({ _id: refreshData._id })
-                
-                if (user && user.password == refreshData.password) {
-
-                    if (user.isActive) {
-
-                        res.status(200).send({
-                            error: false,
-                            bearer: {
-                                access: jwt.sign(user.toJSON(), process.env.ACCESS_KEY, { expiresIn: '30m' })
-                            }
-                        })
-
-                    } else {
-                        res.errorStatusCode = 401
-                        throw new Error("This account is not active.")
-                    }
-                } else {
-                    res.errorStatusCode = 401
-                    throw new Error('Wrong id or password.')
-                }
-            } else {
-                res.errorStatusCode = 401
-                throw new Error('JWT refresh data is wrong.')
-            }
-        } else {
-            res.errorStatusCode = 401
-            throw new Error('Please enter bearer.refresh')
-        }
-
-
         */
+
+    const refreshToken = req.body?.bearer?.refresh;
+
+    if (refreshToken) {
+      const refreshData = await jwt.verify(
+        refreshToken,
+        process.env.REFRESH_KEY
+      );
+      // console.log(refreshData)
+
+      if (refreshData) {
+        const user = await User.findOne({ _id: refreshData._id });
+
+        if (user && user.password == refreshData.password) {
+          if (user.isActive) {
+            res.status(200).send({
+              error: false,
+              bearer: {
+                access: jwt.sign(user.toJSON(), process.env.ACCESS_KEY, {
+                  expiresIn: "30m",
+                }),
+              },
+            });
+          } else {
+            res.errorStatusCode = 401;
+            throw new Error("This account is not active.");
+          }
+        } else {
+          res.errorStatusCode = 401;
+          throw new Error("Wrong id or password.");
+        }
+      } else {
+        res.errorStatusCode = 401;
+        throw new Error("JWT refresh data is wrong.");
+      }
+    } else {
+      res.errorStatusCode = 401;
+      throw new Error("Please enter bearer.refresh");
+    }
   },
 
   logout: async (req, res) => {
@@ -155,6 +151,7 @@ module.exports = {
 
     const auth = req.headers?.authorization; //"Token token"
     const tokenKey = auth ? auth.split(" ") : null; // [ "Token", tokenKey]
+
     if (tokenKey[0] == "Token") {
       const result = await Token.deleteOne({ token: tokenKey[1] });
 
