@@ -99,8 +99,22 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'saadet@clarusway.com',
-        pass: ''
+        pass: 'krkh fxow gujl cjh' // You can also do it by using env.
     }
+})
+
+// SendMail:
+transporter.sendMail({
+
+    from: 'saadet@clarusway.com',
+    to: 'saadet@clarusway.com', // 'abc@def.com, def@ghi.com'
+    subject: 'Hello',
+    text: 'Hello There. How are you?',
+    html: '<p> <b> Hello There </b> <br> How are you? </p>',
+
+}, function (error, success) {
+
+    success ? console.log('SUCCESS:', success) : console.log('ERROR: ', error)
 })
 
 
