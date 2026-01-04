@@ -83,7 +83,7 @@ const nodemailer = require("nodemailer");
 // transporter.sendMail({
 
 //     from: 'awxt4bslsuo53z2h@ethereal.email',
-//     to: 'qadir@clarusway.com', // 'abc@def.com, def@ghi.com'
+//     to: '.....@clarusway.com', // 'abc@def.com, def@ghi.com'
 //     subject: 'Hello',
 //     text: 'Hello There. How are you?',
 //     html: '<p> <b> Hello There </b> <br> How are you? </p>',
@@ -103,19 +103,29 @@ const transporter = nodemailer.createTransport({
     }
 })
 
+//* YandexMail (yandex)
+// const transporter = nodemailer.createTransport({
+//     service: 'yandex',
+//     auth: {
+//         user: 'test@yandex.com',
+//         pass: '11' // your email-password
+//     }
+// })
+
+
 // SendMail:
-transporter.sendMail({
+// transporter.sendMail({
 
-    from: 'saadet@clarusway.com',
-    to: 'saadet@clarusway.com', // 'abc@def.com, def@ghi.com'
-    subject: 'Hello',
-    text: 'Hello There. How are you?',
-    html: '<p> <b> Hello There </b> <br> How are you? </p>',
+//     from: 'saadet@clarusway.com',
+//     to: 'saadet@clarusway.com', // 'abc@def.com, def@ghi.com'
+//     subject: 'Hello',
+//     text: 'Hello There. How are you?',
+//     html: '<p> <b> Hello There </b> <br> How are you? </p>',
 
-}, function (error, success) {
+// }, function (error, success) {
 
-    success ? console.log('SUCCESS:', success) : console.log('ERROR: ', error)
-})
+//     success ? console.log('SUCCESS:', success) : console.log('ERROR: ', error)
+// })
 
 
 /* ------------------------------------------------------- */
