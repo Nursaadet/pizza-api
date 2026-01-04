@@ -71,6 +71,14 @@ module.exports = {
             #swagger.summary = "Update Pizza"
         */
 
+    /* FILE */
+    // console.log('file', req.file) // upload.single()
+    // console.log('files', req.files) // upload.array() || upload.any()
+    if (req.file) {
+      req.body.image = req.file.filename;
+    }
+    /* FILE */
+
     const data = await Pizza.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
@@ -84,9 +92,9 @@ module.exports = {
 
   delete: async (req, res) => {
     /*
-            #swagger.tags = ["Pizzas"]
-            #swagger.summary = "Delete Pizza"
-        */
+                #swagger.tags = ["Pizzas"]
+                #swagger.summary = "Delete Pizza"
+            */
 
     const data = await Pizza.deleteOne({ _id: req.params.id });
 
