@@ -93,6 +93,17 @@ const nodemailer = require("nodemailer");
 //     success ? console.log('SUCCESS:', success) : console.log('ERROR: ', error)
 // })
 
+//* GoogleMail (gmail)
+//* Google -> AccountHome -> Security -> Two-Step-Verify -> App-Passwords
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'saadet@clarusway.com',
+        pass: ''
+    }
+})
+
+
 /* ------------------------------------------------------- */
 // Routes:
 
