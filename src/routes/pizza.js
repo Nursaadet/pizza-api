@@ -22,7 +22,7 @@ const router = require("express").Router();
 //     },
 //   }),
 // });
-
+const upload = require('../middlewares/upload')
 /* ------------------------------------------------------- */
 // routes/pizza:
 
@@ -36,7 +36,11 @@ router
   // .post(upload.single('image'), pizza.create);
   .post(upload.array("image"), pizza.create);
 // .post(upload.any(), pizza.create);
-
+/*
+    <form action="/pizzas" method="POST" enctype="mutipart/form-data">
+        <input type="file" name="image">
+    </form>
+*/ 
 router
   .route("/:id")
   .get(pizza.read)
